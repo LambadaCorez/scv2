@@ -1,0 +1,9 @@
+"scv2"
+{
+    "base"      "base"
+    "title"     "Garry's Mod: SCE v2"
+    "maps"      "^sc_"    
+    "menusystem"    "1"
+
+
+}

@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "Models\weapons\v_stthbaton\v_stunstick_diffuse"
+	"$bumpmap" "models\Weapons\v_stthbaton\v_stunstick_normal"
+	"$normalmapalphaenvmapmask" 1
+	"$envmap" "env_cubemap"
+	"$envmapsaturation" .5
+	"$envmapcontrast" 1
+}

@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "chaos_theory/bar"
+	"$translucent" 1
+}
