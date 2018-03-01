@@ -6,7 +6,7 @@ AddCSLuaFile("ss/cl_silentstep.lua")
 AddCSLuaFile("ss/sh_silentstep.lua")
 AddCSLuaFile("sth/sh_stealth.lua")
 AddCSLuaFile("sth/cl_stealth.lua")
-
+AddCSLuaFile("nv/nvscript.lua")
 
 include("sth/sh_stealth.lua")
 include("sth/stealth.lua")
@@ -14,20 +14,21 @@ include("ss/silentstep.lua")
 include("ss/sh_silentstep.lua")
 include("shared.lua")
 
-
-util.AddNetworkString("roll")
-util.AddNetworkString("prone")
-util.AddNetworkString("on_join")
-util.AddNetworkString("view_normal_send")
-util.AddNetworkString("view_normal")
+util.AddNetworkString("bandage")
 
 
-net.Receive("view_normal_send", function(len, ply)
 
-	net.Start("view_normal")
-	net.Send(ply)
+net.Receive("bandage", function(len, ply)
+	local bandages = tonumber(ply:GetNWInt("bandages"))
+	if bandages > 0 then
+		ply:SetHealth(math.Clamp(ply:Health() + 15,0,100))
+		ply:SetNWInt("bandages", (ply:GetNWInt("bandages") - 1 ))
+	end
 
 end)
+
+
+
 playermodels = {}
 
 playermodels[0] = "models/player/Group03/male_04.mdl"
@@ -63,19 +64,24 @@ function giveWeaponsAmmo( ply )
 end
 
 function GM:PlayerInitialSpawn( ply )
+			
 			ply:ConCommand("sv_tfa_ironsights_enabled 0")
 			ply:SetModel(table.Random(playermodels)) 
 			
-			net.Start("on_join")
-			net.Send(ply)
-			
 	end
 		
+		
+function GM:PlayerAuthed( ply )
+
+	ply:SetNWInt("bandages", 5)
+
+end
 function GM:PlayerSpawn( ply )
+			
+			
 			
 			giveWeaponsAmmo( ply )
 			--Crosshair Commands
-			ply:ConCommand("wos_roll_cameramode 4")
 			ply:ConCommand("sv_tfa_spread_multiplier .8")
 			ply:ConCommand("cl_tfa_hud_crosshair_color_a 225")
 			ply:ConCommand("cl_tfa_hud_crosshair_color_r 255")
@@ -104,6 +110,9 @@ function GM:PlayerSpawn( ply )
 			ply:ConCommand("nv_fx_alphapass 5")
 			ply:ConCommand("nv_etisd_status 0")
 			ply:ConCommand("nv_fx_blur_status 0")
+			ply:ConCommand("nv_illum_bright .1")
+			ply:ConCommand("nv_illum_area 256")
+
 			--wOS Commands
 			ply:ConCommand("prone_bindkey_enabled 0")
 			ply:AllowFlashlight( false )

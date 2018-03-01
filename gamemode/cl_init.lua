@@ -6,11 +6,14 @@ include("sth/sh_stealth.lua")
 include("sth/cl_stealth.lua")
 include("ss/sh_silentstep.lua")
 include("ss/cl_silentstep.lua")
+include("nv/nvscript.lua")
 
 
 local side = false
 
 local click = false
+
+local bandage = false
 
 function toggleOn()
   side = true
@@ -25,11 +28,29 @@ function toggleOn()
 	else
 	click = false
 	end
-  
+	if !bandage then
+		if input.IsKeyDown( KEY_Q ) then
+			bandage = true
+			bandageSelf()
+		
+		end
+	end
   end
+  
+  
   
   hook.Add("Think", "aimView", clickAimDown)
   
+  function bandageSelf()
+  
+  net.Start("bandage")
+  net.SendToServer()
+  
+  timer.Simple(5, function()
+  bandage = false
+  end)
+  
+  end
   
   concommand.Add("toggle_on", toggleOn)
   concommand.Add("toggle_off", toggleOff)
@@ -76,5 +97,6 @@ function MyCalcView( ply, pos, angles, fov )
 
   hook.Add("CalcView", "normalView", MyCalcView)
 
+  
   
   

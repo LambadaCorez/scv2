@@ -32,6 +32,23 @@ surface.CreateFont( "Prototype45", {
 	outline 	= false
 } )
 
+surface.CreateFont( "PrototypeText", {
+	font 		= "Prototype",
+	size 		= rightx/55, 
+	weight 		= 700,
+	blursize 	= 0.6,
+	scanlines 	= 0,
+	antialias 	= true,
+	underline 	= false,
+	italic 		= false,
+	strikeout 	= false,
+	symbol 		= false,
+	rotary 		= false,
+	shadow 		= false,
+	additive 	= false,
+	outline 	= false
+} )
+
 surface.CreateFont( "Prototype60", {
 	font 		= "Bodoni MT Condensed",
 	size 		= rightx/18,
@@ -125,6 +142,8 @@ function DrawHUD()
 
 	draw.SimpleText(magextra, "Prototype45", rightx/4.55, bottomy/1.14, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
+	draw.DrawText("[Q] Use Bandage ["..tostring(ply:GetNWInt("bandages")).."x]", "PrototypeText", rightx/9.5, bottomy/1.22, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	
 	draw.DrawText( "[", "Prototype60", rightx/29.25, bottomy/1.203, Color( 160, 175, 140, 70 ), TEXT_ALIGN_CENTER )
 	
 	draw.DrawText( "]", "Prototype60", rightx/5.6, bottomy/1.203, Color( 160, 175, 140, 70 ), TEXT_ALIGN_CENTER )
