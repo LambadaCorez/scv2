@@ -7,6 +7,7 @@ include("sth/cl_stealth.lua")
 include("ss/sh_silentstep.lua")
 include("ss/cl_silentstep.lua")
 include("nv/nvscript.lua")
+include("stwp2/ststealth2-sounds.lua")
 
 
 local side = false
@@ -15,6 +16,20 @@ local click = false
 
 local bandage = false
 
+local anim = true
+
+local nvg = false
+
+	net.Receive("swapcam", function(len, ply)
+	
+		if !side then
+			side = true
+		else
+			side = false
+		end
+	
+	end)
+
 function toggleOn()
   side = true
   end
@@ -22,32 +37,75 @@ function toggleOn()
   side = false
   end
   
-  function clickAimDown()
+
+  
+  function buttonInputs()
+	if (LocalPlayer():GetActiveWeapon():GetClass() != "weapon_scknife") then
 	if input.IsMouseDown( MOUSE_RIGHT ) then
 	click = true
 	else
 	click = false
 	end
+	end
 	if !bandage then
 		if input.IsKeyDown( KEY_Q ) then
 			bandage = true
+			
 			bandageSelf()
 		
 		end
 	end
+	if !nvg then
+		if input.IsKeyDown( KEY_N ) then
+			print(nvg)
+			nvg = true
+			anim = true
+			NVGActivate()
+		end
+	end
+	
   end
   
   
   
-  hook.Add("Think", "aimView", clickAimDown)
+  hook.Add("Think", "aimView", buttonInputs)
   
   function bandageSelf()
   
-  net.Start("bandage")
-  net.SendToServer()
+  if ply:Health() < 100 then
+	net.Start("bandage")
+	net.SendToServer()
   
+	if tonumber(ply:GetNWInt("bandages") > 0) then
+		surface.PlaySound( clothRip )
+	end
+  end
   timer.Simple(5, function()
   bandage = false
+  end)
+  
+  end
+  
+  function NVGActivate()
+  
+  net.Start("nvg")
+  net.SendToServer()
+  
+	hook.Add("Think", "playAnim", function()
+	if anim then
+	ply:DoAnimationEvent( ACT_GMOD_IN_CHAT )
+	else
+	ply:DoAnimationEvent( ACT_RESET )
+	end
+	end)
+	
+  timer.Simple(.2, function()
+	anim = false
+	hook.Remove("playAnim")
+  end)
+  
+  timer.Simple(1, function()
+  nvg = false
   end)
   
   end

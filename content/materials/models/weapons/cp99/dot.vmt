@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\weapons\cp99\dot"
+	"$additive" "1"
+}

@@ -1,0 +1,7 @@
+"UnlitGeneric" 
+{
+	"$baseTexture" "hud/hud_weapon/sc20ksg_select"
+	"$translucent" "1" 
+	"$no_fullbright" "1"
+
+}

@@ -1,0 +1,17 @@
+"UnlitGeneric"
+{
+	"$basetexture" "hud/scope_sniper"
+	"$translucent" "1" 
+
+	"$model"			"1"
+	"$normalmap" "hud/scope_sniper_normal"
+ 	"$refractamount"		"1"
+ 	"$bluramount"		"1"
+	"$scale"			"[1 1]"
+	"$RefractTintTexture"	"hud\scope_tint"
+	"$translucent"		"1"
+	"$ignorez"		"1"
+	"$no_fullbright"		"1"	
+"$surfaceprop" "Default"
+
+}

@@ -1,0 +1,9 @@
+"UnlitGeneric"
+{
+	// Original shader: AdditiveTextureAndVertexColor
+	"$basetexture" "sprites/redglow1"
+	"$additive" 1
+	"$vertexcolor" 1
+	"$ignorez" "1"
+}
+

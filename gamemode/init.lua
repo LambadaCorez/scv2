@@ -7,23 +7,41 @@ AddCSLuaFile("ss/sh_silentstep.lua")
 AddCSLuaFile("sth/sh_stealth.lua")
 AddCSLuaFile("sth/cl_stealth.lua")
 AddCSLuaFile("nv/nvscript.lua")
+AddCSLuaFile("stwp2/ststealth2-sounds.lua")
 
 include("sth/sh_stealth.lua")
 include("sth/stealth.lua")
 include("ss/silentstep.lua")
 include("ss/sh_silentstep.lua")
 include("shared.lua")
+include("stwp2/ststealth2-sounds.lua")
 
 util.AddNetworkString("bandage")
+util.AddNetworkString("nvg")
+util.AddNetworkString("swapcam")
 
-
+local clothRip = Sound( "items/cloth_rip.wav" )
 
 net.Receive("bandage", function(len, ply)
 	local bandages = tonumber(ply:GetNWInt("bandages"))
 	if bandages > 0 then
 		ply:SetHealth(math.Clamp(ply:Health() + 15,0,100))
 		ply:SetNWInt("bandages", (ply:GetNWInt("bandages") - 1 ))
+		ply:EmitSound( "items/cloth_rip.wav", 25, 100, .7, CHAN_AUTO )
 	end
+
+end)
+
+function GM:ShowSpare2( ply )
+
+	net.Start("swapcam")
+	net.Send(ply)
+
+end
+
+net.Receive("nvg", function(len, ply)
+	
+	ply:ConCommand("nv_togg")
 
 end)
 
@@ -34,18 +52,40 @@ playermodels = {}
 playermodels[0] = "models/player/Group03/male_04.mdl"
 playermodels[1] = "models/player/Group03/male_05.mdl"
 playermodels[2] = "models/player/Group03/male_07.mdl"
-playermodels[3] = "models/player/Group03/male_03.mdl"
-playermodels[4] = "models/player/Group03/male_08.mdl"
-playermodels[5] = "models/player/Group03/male_09.mdl"
+playermodels[3] = "models/player/Group03/male_08.mdl"
+playermodels[4] = "models/player/Group03/male_09.mdl"
 
 weapon = {}
 
 weapon[0] = "tfcss_fiveseven_sh"
+weapon[1] = "weapon_scknife"
+
+weaponDisabled = {}
+
+weaponDisabled[0]="weapon_shotgun"
+weaponDisabled[1]="weapon_ar2"
+weaponDisabled[2]="weapon_smg1"
+weaponDisabled[3]="weapon_frag"
+weaponDisabled[4]="weapon_crossbow"
+weaponDisabled[5]="weapon_357"
+weaponDisabled[6]="weapon_crowbar"
+weaponDisabled[7]="weapon_pistol"
+weaponDisabled[7]="weapon_rpg"
+
 
 ammo = {}
 
 ammo[0] = "item_ammo_pistol"
 ammo[1] = "item_ammo_pistol"
+
+hook.Add( "PlayerCanPickupWeapon", "specWeapons", function( ply, wep )
+	timer.Simple(.1, function()
+	for k, wep in pairs(weaponDisabled) do
+	if (wep) then return false end
+	end
+	end)
+end )
+
 
 function giveWeaponsAmmo( ply )
 
@@ -72,15 +112,22 @@ function GM:PlayerInitialSpawn( ply )
 		
 		
 function GM:PlayerAuthed( ply )
-
+	
 	ply:SetNWInt("bandages", 5)
-
+	giveWeaponsAmmo( ply )
+	
 end
 function GM:PlayerSpawn( ply )
 			
 			
 			
-			giveWeaponsAmmo( ply )
+			timer.Simple(2, function()
+			
+				for k, wep in pairs(weaponDisabled) do
+					ply:StripWeapon(wep)
+				end
+			
+			end)
 			--Crosshair Commands
 			ply:ConCommand("sv_tfa_spread_multiplier .8")
 			ply:ConCommand("cl_tfa_hud_crosshair_color_a 225")

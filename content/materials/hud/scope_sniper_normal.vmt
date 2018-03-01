@@ -1,0 +1,9 @@
+"UnlitGeneric"
+{
+	"$basetexture" "hud/scope_sniper_normal"
+	"$translucent" "1" 
+	"$translucency" "1" 
+	"$ignorez" "1" 
+	
+"$surfaceprop" "Default"
+}

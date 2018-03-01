@@ -137,12 +137,12 @@ function DrawHUD()
 	
 	
 	draw.SimpleText(wpnname, "Prototype45", rightx/4.2, bottomy/1.115, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	if (LocalPlayer():GetActiveWeapon():GetClass() != "weapon_scknife") then
+		draw.SimpleText(magleft, "Prototype45", rightx/3.85, bottomy/1.14, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-	draw.SimpleText(magleft, "Prototype45", rightx/3.85, bottomy/1.14, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-
-	draw.SimpleText(magextra, "Prototype45", rightx/4.55, bottomy/1.14, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-
-	draw.DrawText("[Q] Use Bandage ["..tostring(ply:GetNWInt("bandages")).."x]", "PrototypeText", rightx/9.5, bottomy/1.22, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(magextra, "Prototype45", rightx/4.55, bottomy/1.14, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	end
+	draw.DrawText("[Q] Use Bandage ["..tostring(ply:GetNWInt("bandages")).."x]", "PrototypeText", rightx/9.35, bottomy/1.22, Color(255,255,255,150), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	
 	draw.DrawText( "[", "Prototype60", rightx/29.25, bottomy/1.203, Color( 160, 175, 140, 70 ), TEXT_ALIGN_CENTER )
 	
@@ -158,7 +158,7 @@ end
 hook.Add("HUDPaint","DrawHUD:Draw",DrawHUD)
 
 local function HideThings( name )
-	if(name == "CHudHealth") or (name == "CHudBattery") or(name=="CHudAmmo") or(name=="CHudSecondaryAmmo")then
+	if(name == "CHudHealth") or (name == "CHudBattery") or(name=="CHudAmmo") or(name=="CHudSecondaryAmmo") or(name=="CHudCrosshair") then
 		return false
 	end
 end

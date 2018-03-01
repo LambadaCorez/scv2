@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/weapons/cp99/laser"
+	"$additive" "1"
+}

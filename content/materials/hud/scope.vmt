@@ -1,0 +1,27 @@
+"UnlitGeneric"
+{
+    	"$basetexture" "hud/scscope"
+	"$translucent" "1" 
+	"$translucency" "1" 
+	"$ignorez" "1" 
+
+	"$model"			"1"
+	"$normalmap" "hud/scscope_normal"
+ 	"$refractamount"		"0.2"
+ 	"$bluramount"		"0"
+	"$scale"			"[1 1]"
+	"$RefractTintTexture"	"hud\scope_tint"
+	"$translucent"		"1"
+	"$ignorez"		"1"
+	"$no_fullbright"		"1"	
+"$surfaceprop" "Default"
+"Proxies"
+{
+"AnimatedTexture"
+{
+"animatedTextureVar" "$basetexture"
+"animatedTextureFrameNumVar" "$frame"
+"animatedTextureFrameRate" "10"
+}
+}
+}

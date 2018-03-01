@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/weapons/steyra3/steyra3"
+//	"$bumpmap" "models/weapons/steyra3/steyra3_normal"
+	"$envmap" "env_cubemap"
+	"$envmapmask" "models/weapons/steyra3/steyra3_spec"
+	"$envmaptint" "[ 0.9 1 1 ]"
+}

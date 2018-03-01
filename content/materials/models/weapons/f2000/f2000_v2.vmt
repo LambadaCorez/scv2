@@ -1,0 +1,56 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models\weapons\f2000\f2000_v2_diffuse"
+	"$albedo" ""
+	"$compress" ""
+	"$stretch" ""
+	"$selfillumtint" "{ 0 0 0 }"
+	"$detail" "detail\dt_metal2.vtf"
+	"$detailscale" "50.000000"
+	"$envmap" ""
+	"$envmapmask" ""
+	"$bumpmap" "models\weapons\f2000\f2000_normal"
+	"$bumpcompress" ""
+	"$bumpstretch" ""
+	"$envmapsaturation" "0.000000"
+	"$phongexponent" "15.000000"
+	"$phongalbedotint" "0"
+	"$lightwarptexture" ""
+	"$phongwarptexture" ""
+	"$phongfresnelranges" "[ 0.500000 5.000000 1.000000 ]"
+	"$phongboost" "0.500000"
+	"$phongexponenttexture" ""
+	"$phong" "1"
+	"$selfillummask" ""
+	"$detailblendfactor" "0.900000"
+	"$rimlight" "1"
+	"$rimlightexponent" "50.000000"
+	"$rimlightboost" "0.400000"
+	"$seamless_scale" "0.000000"
+	"$emissiveblendscrollvector" "[ 0.000000 0.000000 ]"
+	"$emissiveblendstrength" "0.000000"
+	"$refractamount" "0.000000"
+	"$fleshbordernoisescale" "0.000000"
+	"$flesheffectcenterradius1" "[ 0.000000 0.000000 0.000000 0.000000 ]"
+	"$flesheffectcenterradius2" "[ 0.000000 0.000000 0.000000 0.000000 ]"
+	"$flesheffectcenterradius3" "[ 0.000000 0.000000 0.000000 0.000000 ]"
+	"$flesheffectcenterradius4" "[ 0.000000 0.000000 0.000000 0.000000 ]"
+	"$fleshborderwidth" "0.200000"
+	"$fleshbordersoftness" "0.000000"
+	"$fleshglobalopacity" "0.000000"
+	"$fleshglossbrightness" "0.000000"
+	"$fleshscrollspeed" "0.000000"
+	"$depthblendscale" "0.000000"
+	
+	// Cloaking
+	"$cloakPassEnabled" "1"
+	"Proxies"
+	{
+		"vm_invis"
+		{
+		}
+		"weapon_invis"
+		{
+		}
+	}
+}

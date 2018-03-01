@@ -1,0 +1,6 @@
+"UnlitGeneric" 
+{
+	"$baseTexture" "hud/hud_weapon/sc_sniper_select"
+	"$translucent" "1" 
+	"$no_fullbright" "1"
+}

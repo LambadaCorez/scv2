@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/weapons/cp99/cp99"
+	"$envmap" "env_cubemap"	
+//	"$bumpmap" "models/weapons/cp99/cp99_normal"
+	"$envmapmask" "models/weapons/cp99/cp99_ref"
+//	"$normalmapalphaenvmapmask" 1
+//	"$envmapcontrast" 1
+//	"$envmapsaturation" 1
+//	"$envmaptint" "[ .5 .5 .5 ]"
+}

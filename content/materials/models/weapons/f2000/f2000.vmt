@@ -1,0 +1,45 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models\weapons\f2000\f2000_diffuse"
+	"$albedo" ""
+	"$compress" ""
+	"$stretch" ""
+	"$selfillumtint" "{ 0 0 0 }"
+	//"$detail" "detail\dt_metal2.vtf"
+	//"$detailscale" "25.000000"
+	"$bumpmap" "models\weapons\f2000\f2000_normal"
+	"$bumpcompress" ""
+	"$bumpstretch" ""
+
+	"$envmapsaturation" "1.000000"
+	"$envmaptint" "[0.02 0.02 0.02]"
+	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask" 1 
+	"$envmapcontrast" 0
+
+	"$phong" "1"
+	"$phongexponent" "11.000000"
+	"$phongwarptexture" ""
+	"$phongfresnelranges" "[ 0.500000 5.000000 1.000000 ]"
+	"$phongboost" "0.600000"
+
+	"$selfillummask" ""
+	"$detailblendfactor" "0.900000"
+	//"$rimlight" "1"
+	//"$rimlightexponent" "50.000000"
+	//"$rimlightboost" "0.400000"
+	
+	// Cloaking
+	"$cloakPassEnabled" "1"
+	"Proxies"
+	{
+		"vm_invis"
+		{
+		}
+		"weapon_invis"
+		{
+		}
+	}
+
+	"$halflambert" "1"	
+}

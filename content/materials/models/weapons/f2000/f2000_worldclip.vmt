@@ -1,0 +1,12 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models\weapons\f2000\f2000_worldclip_diffuse"
+	"$bumpmap" "models\weapons\f2000\f2000_worldclip_normal"
+	
+	// Phong stuff
+	"$phong"						"1"
+	"$phongboost"					"5"
+	"$phongexponent"				"20" // mutually exclusive with $phongexponenttexture!!
+//	"$phongexponenttexture"		"models\weapons\f2000_exponent"
+	"$phongfresnelranges"			"[0.1 0.5 1.0]"
+}
