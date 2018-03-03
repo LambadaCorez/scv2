@@ -1,0 +1,17 @@
+"VertexLitGeneric"
+{
+$baseTexture "models\sam_fisher_txtrs\sam_fisher_body"
+$bumpmap "models\sam_fisher_txtrs\sam_fisher_body_normal"
+
+$phong "1"
+$model "1"
+//$phongexponent "1.5"
+$phongboost "0.10"
+$phongfresnelranges	"[0.05 0.05 0.5]"
+$phongalbedotint 1
+$selfillum 1
+$selfillummask "models\sam_fisher_txtrs\sam_fisher_body_dm"
+
+
+
+}

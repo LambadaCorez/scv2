@@ -1,0 +1,16 @@
+"VertexLitGeneric"
+{
+$baseTexture "models\sam_fisher_txtrs\sam_fisher_body_dm"
+
+$phong "1"
+$model "1"
+//$phongexponent "3.5"
+$phongboost "15"
+$phongfresnelranges	"[0.05 0.5 1]"
+$phongalbedotint 1
+$selfillum 1
+
+$rimlight "1"	
+$rimlightexponent "5"
+$rimlightboost "1.5"
+}

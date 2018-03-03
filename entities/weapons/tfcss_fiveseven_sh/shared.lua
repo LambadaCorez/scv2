@@ -50,7 +50,7 @@ SWEP.VElements = {
 	["light"] = { type = "Model", model = "models/maxofs2d/lamp_projector.mdl", bone = "v_weapon.FIVESEVEN_PARENT", rel = "", pos = Vector(0, -1.377, -7.202), angle = Angle(-90, 0, 0), size = Vector(0.158, 0.082, 0.082), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 }
 SWEP.Primary.NumShots	= 1		-- How many bullets to shoot per trigger pull
-SWEP.Primary.Damage		= 12	-- Base damage per bullet
+SWEP.Primary.Damage		= 35	-- Base damage per bullet
 SWEP.Primary.Spread		= .025	-- Define from-the-hip accuracy 1 is terrible, .0001 is exact)
 SWEP.Primary.IronAccuracy = .015 -- Ironsight accuracy, should be the same for shotguns
 

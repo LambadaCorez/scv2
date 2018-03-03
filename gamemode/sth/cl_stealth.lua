@@ -37,6 +37,7 @@ local search = "hud/search.vtf"
 local lastsend = 0
 local luminocity = 0
 local alertdanger = 0
+local talking = false
 local dangernpc = nil
 local isnpc = false
 local hunters = {}
@@ -266,7 +267,7 @@ hook.Add("HUDPaint","DrawSplinterCellThing",function()
 		surface.DrawTexturedRect(ScrW()/22, ScrH()/1.13, ScrW()/8, ScrH()/125);
 		
 		-- Slider
-		local bar1 = luminocity*0.8
+		local bar1 = luminocity*0.61
 		draw.RoundedBox(4,ScrW()/22-2+bar1, ScrH()/1.13-2,8,11,Color(245,255,240,255))
 	end
 	
@@ -282,7 +283,7 @@ hook.Add("HUDPaint","DrawSplinterCellThing",function()
 		
 		-- Slider
 		--local bar2 = alertdanger*0.9
-		local bar2 = alertdanger*0.81
+		local bar2 = alertdanger*0.61
 		draw.RoundedBox(4,ScrW()/22-2+bar2, ScrH()/1.11-2,8,11,Color(235,255,150,100))
 	end
 end)

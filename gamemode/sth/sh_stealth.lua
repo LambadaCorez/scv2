@@ -47,7 +47,7 @@ if !ConVarExists("stealth_shotrange") then
 end
 
 if !ConVarExists("stealth_suppmultiplier") then
-	CreateConVar("stealth_suppmultiplier","0.3",{FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE, FCVAR_REPLICATED, FCVAR_NOTIFY},"Default is 0.3. Hearing range multiplier for suppressed weapons.")
+	CreateConVar("stealth_suppmultiplier","0.2",{FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE, FCVAR_REPLICATED, FCVAR_NOTIFY},"Default is 0.3. Hearing range multiplier for suppressed weapons.")
 end
 
 if !ConVarExists("stealth_backuptime") then
@@ -55,7 +55,7 @@ if !ConVarExists("stealth_backuptime") then
 end
 
 if !ConVarExists("stealth_backuprange") then
-	CreateConVar("stealth_backuprange","800",{FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE, FCVAR_REPLICATED, FCVAR_NOTIFY},"Default is 800. When an enemy detects you, he will alert all enemies inside this range after a few seconds.")
+	CreateConVar("stealth_backuprange","400",{FCVAR_ARCHIVE, FCVAR_SERVER_CAN_EXECUTE, FCVAR_REPLICATED, FCVAR_NOTIFY},"Default is 800. When an enemy detects you, he will alert all enemies inside this range after a few seconds.")
 end
 
 if !ConVarExists("stealth_sensortime") then

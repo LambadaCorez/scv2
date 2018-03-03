@@ -134,7 +134,8 @@ local silent_default =
 "gmod_flashbang",
 "weapon_wt_cerebralbore",
 "realistic_hook",
-"weapon_fulton"
+"weapon_fulton",
+"weapon_scknife"
 
 
 }
@@ -155,13 +156,19 @@ local suppressed_default =
 "mwr_mp5sd",
 "cod4_m21sd",
 "wpn_stealthtranquilizer",
-"weapon_silenced_usp"
+"weapon_silenced_usp",
+"tfcss_fiveseven_sh"
 }
 
 local npc_default = 
 {
 "npc_metropolice",
-"npc_combine_s"
+"npc_combine_s",
+"CombineElite",
+"CombinePrison",
+"PrisonShotgunner",
+"ShotgunSoldier"
+
 }
 
 local function load_files()

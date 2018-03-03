@@ -40,7 +40,7 @@ SWEP.Category           = "Splinter Cell"
 SWEP.Spawnable = true
 
 SWEP.Primary.Delay	 = 0.75
-SWEP.Primary.Damage	 = 65
+SWEP.Primary.Damage	 = 35
 SWEP.Primary.Force	 = 2
 
 SWEP.Primary.ClipSize		= -1
@@ -52,7 +52,7 @@ SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = true
 SWEP.Secondary.Ammo = "none"
-SWEP.Secondary.Damage = 100
+SWEP.Secondary.Damage = 50
 SWEP.Secondary.Delay = 1
 SWEP.Secondary.Force = 4
 

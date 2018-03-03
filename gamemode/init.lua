@@ -19,8 +19,13 @@ include("stwp2/ststealth2-sounds.lua")
 util.AddNetworkString("bandage")
 util.AddNetworkString("nvg")
 util.AddNetworkString("swapcam")
+util.AddNetworkString("cameraCheck")
+util.AddNetworkString("bandageOther")
+util.AddNetworkString("attachCLModel")
 
 local clothRip = Sound( "items/cloth_rip.wav" )
+
+local plymeta = FindMetaTable("Player")
 
 net.Receive("bandage", function(len, ply)
 	local bandages = tonumber(ply:GetNWInt("bandages"))
@@ -28,6 +33,19 @@ net.Receive("bandage", function(len, ply)
 		ply:SetHealth(math.Clamp(ply:Health() + 15,0,100))
 		ply:SetNWInt("bandages", (ply:GetNWInt("bandages") - 1 ))
 		ply:EmitSound( "items/cloth_rip.wav", 25, 100, .7, CHAN_AUTO )
+	end
+
+end)
+
+net.Receive("bandageOther", function(len, ply)
+	local bandages = tonumber(ply:GetNWInt("bandages"))
+	local ent = net.ReadEntity()
+	if bandages > 0 then
+			if ent:Health() < 100 then
+				ent:SetHealth(math.Clamp(ent:Health() + 15,0,100))
+				ply:SetNWInt("bandages", (ply:GetNWInt("bandages") - 1 ))
+				ply:EmitSound( "items/cloth_rip.wav", 25, 100, .7, CHAN_AUTO )
+			end
 	end
 
 end)
@@ -46,6 +64,7 @@ net.Receive("nvg", function(len, ply)
 end)
 
 
+local pickup = false
 
 playermodels = {}
 
@@ -62,30 +81,67 @@ weapon[1] = "weapon_scknife"
 
 weaponDisabled = {}
 
-weaponDisabled[0]="weapon_shotgun"
-weaponDisabled[1]="weapon_ar2"
-weaponDisabled[2]="weapon_smg1"
-weaponDisabled[3]="weapon_frag"
-weaponDisabled[4]="weapon_crossbow"
-weaponDisabled[5]="weapon_357"
-weaponDisabled[6]="weapon_crowbar"
-weaponDisabled[7]="weapon_pistol"
-weaponDisabled[7]="weapon_rpg"
-
+weaponDisabled["ar2"] = 1
+weaponDisabled["rpg"] = 1
+weaponDisabled["smg"] = 1
+weaponDisabled["shotgun"] = 1
+weaponDisabled["pistol"] = 1
+weaponDisabled["crossbow"] = 1
+weaponDisabled["physgun"] = 1
+weaponDisabled["revolver"] = 1
+weaponDisabled["slam"] = 1
+weaponDisabled["melee"] = 1
+weaponDisabled["melee2"] = 1
+weaponDisabled["grenade"] = 1
 
 ammo = {}
 
 ammo[0] = "item_ammo_pistol"
 ammo[1] = "item_ammo_pistol"
 
-hook.Add( "PlayerCanPickupWeapon", "specWeapons", function( ply, wep )
-	timer.Simple(.1, function()
-	for k, wep in pairs(weaponDisabled) do
-	if (wep) then return false end
-	end
-	end)
-end )
 
+function GM:PlayerCanPickupWeapon( ply, wep )
+	local pickup = true
+	local totalWep = ply:GetWeapons()
+	
+        for k, v in pairs(totalWep) do
+
+			local ht = v:GetHoldType()
+			
+            if ( weaponDisabled[ht] ) then
+			if ( weaponDisabled[ht] == 1 ) then
+				hasPrimary = true
+			end
+		end
+		end
+		
+		local ht = wep:GetHoldType()
+	
+		if ( not weaponDisabled[ht] ) then
+			return true
+		end
+        
+		if ( weaponDisabled[ht] == 1 and hasPrimary ) then
+		return false
+		end
+		
+		
+end
+
+function GM:PlayerSwitchWeapon( ply, oldWep, newWep )
+
+	
+	if newWep:GetClass() == ( "weapon_scknife" ) then
+		boolin = false
+	else
+		boolin = true
+	end
+	
+	net.Start("cameraCheck")
+	net.WriteBool( boolin )
+	net.Send(ply)
+
+end
 
 function giveWeaponsAmmo( ply )
 
@@ -107,28 +163,47 @@ function GM:PlayerInitialSpawn( ply )
 			
 			ply:ConCommand("sv_tfa_ironsights_enabled 0")
 			ply:SetModel(table.Random(playermodels)) 
+			print("WOWOAWE")
+			ply:SetCanZoom(false)
 			
 	end
-		
-		
-function GM:PlayerAuthed( ply )
 	
-	ply:SetNWInt("bandages", 5)
-	giveWeaponsAmmo( ply )
+function nvgGoggles(ply)
+
+	local bone_id = ply:GetAttachment(ply:LookupAttachment("head"))
+		local nvg = ents.Create( "nvg_goggles" )
 	
+	nvg:SetPos( Vector( 0, 0, 0 ) )
+	nvg:SetModelScale( 1.2 )
+	nvg:SetAngles( Angle( 0, 0, 90 ) )
+	nvg:FollowBone( ply, ply:LookupBone("ValveBiped.Bip01_Head1") )
+	nvg:SetLocalPos( Vector( -12.3, -.1, 0 ) )
+	nvg:SetLocalAngles( Angle( 0, -90, 270 ) )
+	nvg:Spawn()
+	if !ply:Alive() then
+	nvg:Remove()
+	end
+
 end
+	
 function GM:PlayerSpawn( ply )
 			
+			nvgGoggles(ply)
 			
 			
-			timer.Simple(2, function()
+			net.Start("attachCLModel")
+			net.Send(ply)
 			
-				for k, wep in pairs(weaponDisabled) do
-					ply:StripWeapon(wep)
-				end
-			
+			timer.Simple(.1, function()
+			ply:SetNWInt("bandages", 5)
 			end)
+			
+			ply:SetWalkSpeed(175)
+			ply:SetRunSpeed(230)
+			giveWeaponsAmmo( ply )
+		
 			--Crosshair Commands
+			ply:SetCanZoom( true )
 			ply:ConCommand("sv_tfa_spread_multiplier .8")
 			ply:ConCommand("cl_tfa_hud_crosshair_color_a 225")
 			ply:ConCommand("cl_tfa_hud_crosshair_color_r 255")
@@ -142,7 +217,6 @@ function GM:PlayerSpawn( ply )
 			ply:ConCommand("cl_tfa_hud_crosshair_dot 1")
 			ply:ConCommand("sv_tfa_cmenu 0")
 			ply:ConCommand("sv_tfa_default_clip 1")
-			ply:ConCommand("cl_tfa_viewbob_reloading 0")
 			ply:ConCommand("sv_tfa_sprint_enabled 0")
 			ply:ConCommand("cl_tfa_gunbob_intensity 0")
 			--Nightvision Commands
@@ -161,13 +235,15 @@ function GM:PlayerSpawn( ply )
 			ply:ConCommand("nv_illum_area 256")
 
 			--wOS Commands
-			ply:ConCommand("prone_bindkey_enabled 0")
 			ply:AllowFlashlight( false )
-			
-			ply:ConCommand("wos_roll_doubletap 0")
 			ply:ConCommand("stealth_drawbar 1")
 			ply:SetJumpPower(200)
 											
 
 	end
-
+	
+	function GM:PlayerDeath( ply, inflict, attack )
+	
+		nvgGoggles(ply)
+		
+	end
